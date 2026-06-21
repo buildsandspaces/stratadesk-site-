@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrataDesk AI — AGM minutes, drafted in minutes</title>
+<meta name="description" content="Paste your rough AGM notes or transcript. Get a polished, compliant draft of minutes back in under a minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF8F4;
+    --ink: #1B2B3A;
+    --charcoal: #2B2B28;
+    --brick: #B5563C;
+    --brick-soft: #E9D8D1;
+    --sage: #7A8B7F;
+    --line: #DAD4C6;
+    --line-strong: #B8AF98;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--charcoal);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  a { color: var(--brick); text-decoration: none; }
+
+  /* ---- Header / notice strip ---- */
+  .notice-strip {
+    border-bottom: 1px solid var(--line-strong);
+    padding: 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+  .notice-strip .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .notice-strip .ref { color: var(--charcoal); opacity: 0.55; }
+
+  /* ---- Hero ---- */
+  .hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brick);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--brick);
+    display: inline-block;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: clamp(34px, 5.4vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 13.5ch;
+  }
+  .hero-sub {
+    margin-top: 22px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--charcoal);
+    max-width: 46ch;
+    opacity: 0.85;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+  .hero-meta {
+    margin-top: 36px;
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+  .meta-item { border-left: 2px solid var(--brick); padding-left: 14px; }
+  .meta-num { font-family: 'Fraunces', serif; font-size: 26px; color: var(--ink); font-weight: 500; }
+  .meta-label { font-size: 12px; color: var(--sage); margin-top: 2px; }
+
+  .cta-row { margin-top: 38px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    padding: 13px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--brick); color: var(--paper); }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* ---- Problem section ---- */
+  .problem { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  .problem-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: start; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 30px);
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .problem p { font-size: 16px; color: var(--charcoal); opacity: 0.85; margin-bottom: 14px; }
+  .problem-list { margin-top: 8px; border-top: 1px solid var(--line); }
+  .problem-list li {
+    list-style: none;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 14px;
+    font-size: 14.5px;
+    color: var(--charcoal);
+  }
+  .problem-list .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--brick);
+    flex-shrink: 0;
+    width: 50px;
+    padding-top: 1px;
+  }
+
+  /* ---- Tool section ---- */
+  .tool-section { padding: 60px 0 70px; border-bottom: 1px solid var(--line); }
+  .tool-card {
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 32px;
+    margin-top: 28px;
+  }
+  .tool-card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; flex-wrap: wrap; gap: 8px; }
+  .tool-card-head .title { font-family: 'Fraunces', serif; font-size: 19px; color: var(--ink); }
+  .tool-card-head .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  label.field-label {
+    display: block;
+    font-size: 12.5px;
+    color: var(--sage);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 11px 13px;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--charcoal);
+  }
+  textarea:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--brick);
+  }
+  textarea { resize: vertical; line-height: 1.5; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+
+  .generate-btn {
+    margin-top: 20px;
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 14px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .generate-btn:hover { opacity: 0.92; }
+  .generate-btn:disabled { opacity: 0.55; cursor: default; }
+
+  .status-box {
+    display: none;
+    margin-top: 16px;
+    padding: 12px 15px;
+    background: #F4F0E6;
+    border-radius: 4px;
+    font-size: 13.5px;
+    color: var(--sage);
+    border-left: 2px solid var(--brick);
+  }
+
+  .result-box {
+    display: none;
+    margin-top: 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .result-box pre {
+    white-space: pre-wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+  }
+
+  .result-actions { display: none; gap: 10px; margin-top: 12px; }
+  .small-btn {
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .small-btn:hover { border-color: var(--ink); }
+
+  .disclaimer { margin-top: 18px; font-size: 12.5px; color: var(--sage); }
+
+  /* ---- How it works ---- */
+  .how { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+  .how-step .num {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    color: var(--brick-soft);
+    -webkit-text-stroke: 1px var(--brick);
+    color: transparent;
+    margin-bottom: 10px;
+  }
+  .how-step h3 { font-family: 'Fraunces', serif; font-size: 17px; color: var(--ink); margin-bottom: 8px; font-weight: 500; }
+  .how-step p { font-size: 14px; color: var(--charcoal); opacity: 0.8; }
+
+  /* ---- Footer / contact ---- */
+  footer { padding: 50px 0 60px; }
+  .footer-grid { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .footer-brand { font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink); }
+  .footer-brand span { color: var(--brick); }
+  footer p { font-size: 13px; color: var(--sage); margin-top: 6px; max-width: 38ch; }
+  .footer-contact a {
+    font-size: 14px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+  }
+  .footer-contact a:hover { border-color: var(--brick); color: var(--brick); }
+
+  @media (max-width: 720px) {
+    .problem-grid { grid-template-columns: 1fr; gap: 30px; }
+    .field-row { grid-template-columns: 1fr; }
+    .how-steps { grid-template-columns: 1fr; gap: 26px; }
+    .hero { padding: 48px 0 40px; }
+    .hero-meta { gap: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="notice-strip">
+  <div class="wrap">
+    <span>STRATADESK AI</span>
+    <span class="ref">REF: SDA-AGM-001 · SYDNEY, NSW</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">For strata & community title managers</div>
+    <h1>AGM minutes, drafted while you do everything else.</h1>
+    <p class="hero-sub">You run the meeting. We draft the minutes. Paste your notes or transcript, get back a <strong>polished, properly structured draft</strong> in under a minute — ready for you to review and send.</p>
+
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-num">~3 hrs</div>
+        <div class="meta-label">typically spent writing up one AGM</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">&lt;60 sec</div>
+        <div class="meta-label">to get a first draft back</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">$0</div>
+        <div class="meta-label">to try it on your next meeting</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="#tool" class="btn btn-primary">Try it on your notes</a>
+      <a href="#contact" class="btn btn-ghost">Ask a question</a>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="wrap problem-grid">
+    <div>
+      <div class="section-label">The problem</div>
+      <h2>Writing up an AGM is the part of the job nobody got into property management for.</h2>
+      <p>You sit through the meeting. Then you sit down again — that evening, or the next morning before everything else — to turn scrawled notes or a recording into something formal enough to send to every owner and hold up if anyone ever disputes a decision.</p>
+      <p>It's slow, it's repetitive across every scheme you manage, and it's the kind of writing where getting the structure right matters more than getting it written fast.</p>
+    </div>
+    <ul class="problem-list">
+      <li><span class="tag">01 / DOC</span> Owners expect minutes within days, not weeks — but you've got five other schemes waiting too.</li>
+      <li><span class="tag">02 / DOC</span> Every scheme's bylaws, motions, and quorum details are slightly different — easy to misstate something.</li>
+      <li><span class="tag">03 / DOC</span> A messy first draft means a messy final record. Minutes need to be defensible.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tool-section" id="tool">
+  <div class="wrap">
+    <div class="section-label">Try it now — no signup</div>
+    <h2>Paste your notes. Get a draft back.</h2>
+    <p style="font-size:15px;color:var(--charcoal);opacity:0.8;max-width:54ch">Works from rough bullet points, a dictated transcript, or notes typed during the meeting. The more detail you give it, the more complete the draft.</p>
+
+    <div class="tool-card">
+      <div class="tool-card-head">
+        <span class="title">AGM minutes generator</span>
+        <span class="status">● Ready</span>
+      </div>
+
+      <label class="field-label" for="schemeName">Scheme name</label>
+      <input type="text" id="schemeName" placeholder="e.g. Strata Plan 12345, 'The Pavilions'">
+
+      <div class="field-row">
+        <div>
+          <label class="field-label" for="meetingDate">Meeting date</label>
+          <input type="text" id="meetingDate" placeholder="e.g. 18 June 2026">
+        </div>
+        <div>
+          <label class="field-label" for="meetingType">Meeting type</label>
+          <input type="text" id="meetingType" placeholder="e.g. Annual General Meeting">
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <label class="field-label" for="rawNotes">Your rough notes or transcript</label>
+        <textarea id="rawNotes" rows="9" placeholder="e.g. Meeting started 7pm. Present: John Smith (chair), Mary Lee, owner of lot 4...&#10;&#10;Item 1: Insurance renewal discussed. Quote from XYZ Insurance $12,400 approved by all owners present.&#10;&#10;Item 2: Roof leak in common area reported by lot 7. Agreed to get 3 quotes for repair..."></textarea>
+      </div>
+
+      <button id="generateBtn" class="generate-btn">Generate draft minutes</button>
+
+      <div id="statusBox" class="status-box"></div>
+
+      <div id="resultBox" class="result-box"><pre id="resultText"></pre></div>
+      <div id="resultActions" class="result-actions">
+        <button id="copyBtn" class="small-btn">Copy text</button>
+        <button id="downloadBtn" class="small-btn">Download as .txt</button>
+      </div>
+
+      <p class="disclaimer">This produces a first draft only. Always review against your scheme's bylaws and have a human check it before distributing to owners.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="section-label">How it works</div>
+    <h2>Three steps, no software to learn.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="num">01</div>
+        <h3>Bring your notes</h3>
+        <p>Rough bullet points from the meeting, a dictated voice transcript, or notes typed live — whatever you've already got.</p>
+      </div>
+      <div class="how-step">
+        <div class="num">02</div>
+        <h3>Get a structured draft</h3>
+        <p>Attendance, quorum, numbered agenda items, motions and outcomes — formatted the way minutes are meant to read.</p>
+      </div>
+      <div class="how-step">
+        <div class="num">03</div>
+        <h3>Review and send</h3>
+        <p>Check it against what was actually said and your scheme's bylaws, make any edits, then send it on to owners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">Strata<span>Desk</span> AI</div>
+      <p>Built for strata and community title managers in Sydney who'd rather spend their evenings on anything other than minute-taking.</p>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:hello@stratadeskai.com.au">hello@stratadeskai.com.au</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const generateBtn = document.getElementById('generateBtn');
+const statusBox = document.getElementById('statusBox');
+const resultBox = document.getElementById('resultBox');
+const resultText = document.getElementById('resultText');
+const resultActions = document.getElementById('resultActions');
+let lastOutput = '';
+
+function setStatus(text, show) {
+  statusBox.style.display = show ? 'block' : 'none';
+  statusBox.textContent = text;
+}
+
+generateBtn.addEventListener('click', async () => {
+  const notes = document.getElementById('rawNotes').value.trim();
+  const scheme = document.getElementById('schemeName').value.trim() || '[Scheme name not provided]';
+  const date = document.getElementById('meetingDate').value.trim() || '[Date not provided]';
+  const meetingType = document.getElementById('meetingType').value.trim() || 'Annual General Meeting';
+
+  if (!notes) {
+    setStatus('Paste some meeting notes first.', true);
+    return;
+  }
+
+  generateBtn.disabled = true;
+  generateBtn.textContent = 'Generating...';
+  setStatus('Drafting your minutes — this takes about 10 seconds.', true);
+  resultBox.style.display = 'none';
+  resultActions.style.display = 'none';
+
+  try {
+    const response = await fetch("/api/generate-minutes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ scheme, meetingType, date, notes })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.text) {
+      throw new Error(data.error || 'No output returned');
+    }
+
+    const text = data.text;
+    lastOutput = text;
+    resultText.textContent = text;
+    resultBox.style.display = 'block';
+    resultActions.style.display = 'flex';
+    setStatus('Draft ready below. Review carefully before sending — always have a human check it.', true);
+  } catch (err) {
+    setStatus('Something went wrong generating the draft. Try again, or shorten the notes and retry.', true);
+  } finally {
+    generateBtn.disabled = false;
+    generateBtn.textContent = 'Generate draft minutes';
+  }
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  navigator.clipboard.writeText(lastOutput);
+  const btn = document.getElementById('copyBtn');
+  const original = btn.textContent;
+  btn.textContent = 'Copied';
+  setTimeout(() => { btn.textContent = original; }, 1500);
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  const blob = new Blob([lastOutput], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'AGM_minutes_draft.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
